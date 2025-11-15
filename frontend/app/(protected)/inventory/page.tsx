@@ -181,6 +181,8 @@ export default function Inventory() {
         description: "",
         categoryId: "",
         currentPrice: "",
+        minPrice: "",
+        maxPrice: "",
         initialQuantity: "",
         notes: "",
       });
