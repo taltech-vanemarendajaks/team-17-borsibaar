@@ -11,6 +11,7 @@ import com.borsibaar.mapper.BarStationMapper;
 import com.borsibaar.repository.BarStationRepository;
 import com.borsibaar.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BarStationService {
@@ -88,7 +90,11 @@ public class BarStationService {
 
         // Update assigned users
         if (request.userIds() != null) {
-            // Clear existing assignments
+            // Clear existing assignments from both sides
+            Set<User> existingUsers = new HashSet<>(station.getUsers());
+            for (User user : existingUsers) {
+                user.getBarStations().remove(station);
+            }
             station.getUsers().clear();
 
             if (!request.userIds().isEmpty()) {
@@ -131,6 +137,8 @@ public class BarStationService {
                 throw new BadRequestException("User " + userId + " does not belong to this organization");
             }
 
+            // Add the station to the user's barStations (owning side)
+            user.getBarStations().add(station);
             users.add(user);
         }
         return users;

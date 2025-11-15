@@ -157,15 +157,17 @@ export default function POSManagement() {
 
     setIsSubmitting(true);
     try {
+      const payload = {
+        name: formName,
+        description: formDescription,
+        isActive: true,
+        userIds: formUserIds,
+      };
+
       const response = await fetch("/api/backend/bar-stations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formName,
-          description: formDescription,
-          isActive: true,
-          userIds: formUserIds,
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -198,17 +200,19 @@ export default function POSManagement() {
 
     setIsSubmitting(true);
     try {
+      const payload = {
+        name: formName,
+        description: formDescription,
+        isActive: true,
+        userIds: formUserIds,
+      };
+
       const response = await fetch(
         `/api/backend/bar-stations/${editingStation.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formName,
-            description: formDescription,
-            isActive: true,
-            userIds: formUserIds,
-          }),
+          body: JSON.stringify(payload),
         }
       );
 
