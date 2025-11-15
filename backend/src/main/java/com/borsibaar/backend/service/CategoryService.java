@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
 
 @Service
 public class CategoryService {
@@ -69,13 +67,13 @@ public class CategoryService {
                     categoryRepository.findById(id);
                     return dto;
                 })
-                .orElseThrow(() -> new NotFoundException("Category not found: " + id ));
+                .orElseThrow(() -> new NotFoundException("Category not found: " + id));
     }
 
     @Transactional
     public CategoryResponseDto deleteReturningDto(Long id, Long organizationId) {
-        return  categoryRepository.findByIdAndOrganizationId(id, organizationId)
-                .map( category -> {
+        return categoryRepository.findByIdAndOrganizationId(id, organizationId)
+                .map(category -> {
                     CategoryResponseDto dto = categoryMapper.toResponse(category);
                     categoryRepository.delete(category);
                     return dto;

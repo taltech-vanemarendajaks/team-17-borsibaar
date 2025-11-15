@@ -143,7 +143,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 1
+                  value: "1"
               - column:
                   name: name
                   value: Default Organization
@@ -152,7 +152,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 2
+                  value: "2"
               - column:
                   name: name
                   value: TalTech ITÜK
@@ -161,7 +161,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 3
+                  value: "3"
               - column:
                   name: name
                   value: University of Tartu
@@ -484,7 +484,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: organization_id
-                  value: 2
+                  value: "2"
               - column:
                   name: name
                   value: Beer
@@ -496,7 +496,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: organization_id
-                  value: 2
+                  value: "2"
               - column:
                   name: name
                   value: Wine
@@ -508,7 +508,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: organization_id
-                  value: 2
+                  value: "2"
               - column:
                   name: name
                   value: Spirits
@@ -520,7 +520,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: organization_id
-                  value: 2
+                  value: "2"
               - column:
                   name: name
                   value: Cocktails
@@ -532,7 +532,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: organization_id
-                  value: 2
+                  value: "2"
               - column:
                   name: name
                   value: Non-Alcoholic
