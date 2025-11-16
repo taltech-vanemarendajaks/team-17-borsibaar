@@ -96,18 +96,13 @@ deploy-job:
         docker-compose -f $DOCKER_COMPOSE_FILE up -d
 
         # Deploy frontend (standalone)
-        sudo cp -r /tmp/frontend/.next $NGINX_ROOT/
-        sudo cp -r /tmp/frontend/public $NGINX_ROOT/
-
-        # Set correct permissions
-        sudo chown -R www-data:www-data $NGINX_ROOT
-        sudo chmod -R 755 $NGINX_ROOT
+        cd frontend
+        npm ci --production
 
         # Reload nginx
         sudo nginx -t && sudo nginx -s reload
         
         # Clean up old images
-        rm -rf /tmp/backend /tmp/frontend /tmp/.env.production
         docker image prune -f
         
         echo "Deployment complete!"
