@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.server.ResponseStatusException;
@@ -44,6 +45,9 @@ class ProductControllerTest {
 
     @MockitoBean
     private ProductService productService;
+
+    @MockitoBean
+    private ClientRegistrationRepository clientRegistrationRepository;
 
     @AfterEach
     void tearDown() {
