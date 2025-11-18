@@ -20,6 +20,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
@@ -36,16 +38,24 @@ class InventoryServiceTest {
 
     @Mock
     private InventoryRepository inventoryRepository;
+
     @Mock
     private InventoryTransactionRepository inventoryTransactionRepository;
+
     @Mock
     private ProductRepository productRepository;
+
     @Mock
     private UserRepository userRepository;
+
     @Mock
     private BarStationRepository barStationRepository;
+
     @Mock
     private InventoryMapper inventoryMapper;
+
+    @Mock
+    private ClientRegistrationRepository clientRegistrationRepository;
 
     @InjectMocks private InventoryService inventoryService;
 

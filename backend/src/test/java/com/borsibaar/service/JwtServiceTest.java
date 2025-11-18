@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.nio.charset.StandardCharsets;
@@ -20,6 +22,9 @@ class JwtServiceTest {
 
     @Autowired
     private JwtService jwtService;
+
+    @MockitoBean
+    private ClientRegistrationRepository clientRegistrationRepository;
 
     private final String testSecret = "test-secret-key-for-jwt-testing-purposes-at-least-256-bits";
 

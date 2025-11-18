@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,6 +35,9 @@ class JwtAuthenticationFilterTest {
 
     @MockitoBean
     private UserRepository userRepository;
+
+    @MockitoBean
+    private ClientRegistrationRepository clientRegistrationRepository;
 
     private final String testSecret = "test-secret-key-for-jwt-testing-purposes-at-least-256-bits";
 
