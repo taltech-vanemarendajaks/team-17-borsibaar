@@ -28,7 +28,7 @@ export function StationManagementHeader({
   onCreate,
 }: StationManagementHeaderProps) {
   return (
-    <div className="rounded-lg bg-card p-4 sm:p-6 shadow-sm mb-4 sm:mb-6 border-1 border-[color-mix(in oklab, var(--ring) 50%, transparent)]">
+    <div className="rounded-lg bg-card p-4 sm:p-6 shadow-sm mb-4 border-1 border-[color-mix(in oklab, var(--ring) 50%, transparent)]">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <ShoppingCart className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 flex-shrink-0" />
