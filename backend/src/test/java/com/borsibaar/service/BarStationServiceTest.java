@@ -112,7 +112,7 @@ class BarStationServiceTest {
         BarStationResponseDto dto = barStationService.createStation(1L, req);
         assertEquals("New", dto.name());
         verify(barStationRepository).save(captor.capture());
-        assertTrue(Boolean.TRUE.equals(captor.getValue().getIsActive()));
+        assertEquals(Boolean.TRUE, captor.getValue().getIsActive());
     }
 
     @Test
