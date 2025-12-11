@@ -103,7 +103,7 @@ export default function PriceHistoryGraphFancy({
   }, []);
 
   const rotateOnce = useCallback(() => {
-    const flat = flatten(groupsRef.current);
+    const flat = flatten(groupsRef.current).filter(p => p.unitPrice != p.basePrice);
     if (flat.length === 0) return;
     const cur = activeProductRef.current;
     let nextIdx: number;
@@ -216,8 +216,8 @@ export default function PriceHistoryGraphFancy({
     if (!wrapRef.current) return;
     d3.select(wrapRef.current).selectAll("*").remove();
 
-    const w = wrapRef.current.clientWidth || 760;
-    const h = Math.max(320, Math.round(w * 0.48));
+    const w = wrapRef.current.clientWidth;
+    const h = window.innerHeight * 0.60; //Math.max(320, Math.round(w * 0.48));
     const margin = { top: 56, right: 32, bottom: 56, left: 80 };
 
     const svg = d3
