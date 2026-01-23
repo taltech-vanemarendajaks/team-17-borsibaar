@@ -989,3 +989,18 @@ databaseChangeLog:
         - dropColumn:
             columnName: price_decrease_step
             tableName: organizations
+
+  - changeSet:
+      id: 015-drop-inventory-organization-id
+      author: martin
+      changes:
+        - dropColumn:
+            tableName: inventory
+            columnName: organization_id
+      rollback:
+        - addColumn:
+            tableName: inventory
+            columns:
+              - column:
+                  name: organization_id
+                  type: bigint
