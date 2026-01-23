@@ -6,3 +6,7 @@
 * Lara Luks
 * Margo Hütt
 * Mai Raadik
+
+## Team workflow:
+
+```We commit, request and review. We win```
