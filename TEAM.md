@@ -1,2 +1,2 @@
-Team name: Suitsusink
-Members: Martin!
+Team name: Äge tiim
+Members: Martin
