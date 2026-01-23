@@ -78,8 +78,12 @@ class CategoryServiceTest {
 
     @Test
     void getAllByOrg_ReturnsMappedList() {
-        Category c1 = new Category(); c1.setId(1L); c1.setName("A");
-        Category c2 = new Category(); c2.setId(2L); c2.setName("B");
+        Category c1 = new Category();
+        c1.setId(1L);
+        c1.setName("A");
+        Category c2 = new Category();
+        c2.setId(2L);
+        c2.setName("B");
         when(categoryRepository.findAllByOrganizationId(1L)).thenReturn(List.of(c1, c2));
         when(categoryMapper.toResponse(c1)).thenReturn(new CategoryResponseDto(1L, "A", true));
         when(categoryMapper.toResponse(c2)).thenReturn(new CategoryResponseDto(2L, "B", false));
@@ -96,7 +100,9 @@ class CategoryServiceTest {
 
     @Test
     void deleteReturningDto_Success_Deletes() {
-        Category cat = new Category(); cat.setId(5L); cat.setName("Del");
+        Category cat = new Category();
+        cat.setId(5L);
+        cat.setName("Del");
         when(categoryRepository.findByIdAndOrganizationId(5L, 1L)).thenReturn(Optional.of(cat));
         when(categoryMapper.toResponse(cat)).thenReturn(new CategoryResponseDto(5L, "Del", true));
 
