@@ -157,32 +157,29 @@ class InventoryServiceTest {
 
     @Test
     void getByOrganization_FiltersInactiveProducts() {
-        Inventory inv1 = new Inventory();
-        inv1.setId(1L);
-        inv1.setOrganizationId(1L);
-        inv1.setProductId(10L);
-        inv1.setQuantity(BigDecimal.ONE);
-        inv1.setUpdatedAt(OffsetDateTime.now());
-        Inventory inv2 = new Inventory();
-        inv2.setId(2L);
-        inv2.setOrganizationId(1L);
-        inv2.setProductId(11L);
-        inv2.setQuantity(BigDecimal.ONE);
-        inv2.setUpdatedAt(OffsetDateTime.now());
-        when(inventoryRepository.findByOrganizationId(1L)).thenReturn(List.of(inv1, inv2));
         Product p1 = new Product();
         p1.setId(10L);
         p1.setActive(true);
         p1.setBasePrice(BigDecimal.ONE);
         p1.setName("A");
         Product p2 = new Product();
-        p2.setId(11L);
-        p2.setActive(false);
+        p2.setId(11L); p2.setActive(false);
         p2.setBasePrice(BigDecimal.ONE);
         p2.setName("B");
-        when(productRepository.findById(10L)).thenReturn(Optional.of(p1));
-        when(productRepository.findById(11L)).thenReturn(Optional.of(p2));
-        when(inventoryMapper.toResponse(inv1)).thenReturn(new InventoryResponseDto(1L, 1L, 10L, "A", BigDecimal.ONE, BigDecimal.ONE, "abc", null, null, null, OffsetDateTime.now().toString()));
+        Inventory inv1 = new Inventory();
+        inv1.setId(1L);
+        inv1.setOrganizationId(1L);
+        inv1.setProduct(p1);
+        inv1.setQuantity(BigDecimal.ONE);
+        inv1.setUpdatedAt(OffsetDateTime.now());
+        Inventory inv2 = new Inventory();
+        inv2.setId(2L);
+        inv2.setOrganizationId(1L);
+        inv2.setProduct(p2);
+        inv2.setQuantity(BigDecimal.ONE);
+        inv2.setUpdatedAt(OffsetDateTime.now());
+        when(inventoryRepository.findByOrganizationId(1L)).thenReturn(List.of(inv1, inv2));
+        when(inventoryMapper.toResponse(inv1)).thenReturn(new InventoryResponseDto(1L,1L,10L,"A",BigDecimal.ONE,BigDecimal.ONE, "abc", null,null,null,OffsetDateTime.now().toString()));
         List<InventoryResponseDto> result = inventoryService.getByOrganization(1L);
         assertEquals(1, result.size());
     }
