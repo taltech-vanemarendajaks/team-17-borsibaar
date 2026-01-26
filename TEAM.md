@@ -4,5 +4,5 @@
 * Martin Munck (@MMunck)
 * Taavet Jukola (@KarVaneOrav)
 * Lara Luks (@laracroft8)
-* Margo Hütt
-* Mai Raadik
+* Margo Hütt (@margohutt_99239)
+* Mai Raadik (@kaneelisuhkur)
