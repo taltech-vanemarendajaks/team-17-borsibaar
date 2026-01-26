@@ -163,7 +163,8 @@ class InventoryServiceTest {
         p1.setBasePrice(BigDecimal.ONE);
         p1.setName("A");
         Product p2 = new Product();
-        p2.setId(11L); p2.setActive(false);
+        p2.setId(11L);
+        p2.setActive(false);
         p2.setBasePrice(BigDecimal.ONE);
         p2.setName("B");
         Inventory inv1 = new Inventory();
@@ -179,7 +180,7 @@ class InventoryServiceTest {
         inv2.setQuantity(BigDecimal.ONE);
         inv2.setUpdatedAt(OffsetDateTime.now());
         when(inventoryRepository.findByOrganizationId(1L)).thenReturn(List.of(inv1, inv2));
-        when(inventoryMapper.toResponse(inv1)).thenReturn(new InventoryResponseDto(1L,1L,10L,"A",BigDecimal.ONE,BigDecimal.ONE, "abc", null,null,null,OffsetDateTime.now().toString()));
+        when(inventoryMapper.toResponse(inv1)).thenReturn(new InventoryResponseDto(1L, 1L, 10L, "A", BigDecimal.ONE, BigDecimal.ONE, "abc", null, null, null, OffsetDateTime.now().toString()));
         List<InventoryResponseDto> result = inventoryService.getByOrganization(1L);
         assertEquals(1, result.size());
     }
