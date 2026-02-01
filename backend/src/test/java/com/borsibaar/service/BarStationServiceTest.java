@@ -25,18 +25,26 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class BarStationServiceTest {
 
-    @Mock private BarStationRepository barStationRepository;
-    @Mock private UserRepository userRepository;
-    @Mock private BarStationMapper barStationMapper;
+    @Mock
+    private BarStationRepository barStationRepository;
+    @Mock
+    private UserRepository userRepository;
+    @Mock
+    private BarStationMapper barStationMapper;
 
-    @InjectMocks private BarStationService barStationService;
+    @InjectMocks
+    private BarStationService barStationService;
 
     @Test
     void createStation_Success_AssignsUsers() {
         UUID uId = UUID.randomUUID();
         BarStationRequestDto request = new BarStationRequestDto("Main", "Desc", true, List.of(uId));
         when(barStationRepository.findByOrganizationId(1L)).thenReturn(List.of());
-        User user = new User(); user.setId(uId); user.setOrganizationId(1L); user.setBarStations(new HashSet<>()); user.setName("User");
+        User user = new User();
+        user.setId(uId);
+        user.setOrganizationId(1L);
+        user.setBarStations(new HashSet<>());
+        user.setName("User");
         when(userRepository.findById(uId)).thenReturn(Optional.of(user));
         BarStation saved = BarStation.builder().id(5L).name("Main").organizationId(1L).users(new HashSet<>()).build();
         when(barStationRepository.save(any(BarStation.class))).thenReturn(saved);
@@ -74,7 +82,10 @@ class BarStationServiceTest {
     @Test
     void getUserStations_UserOrgMismatch_Throws() {
         UUID uid = UUID.randomUUID();
-        User user = new User(); user.setId(uid); user.setOrganizationId(2L); user.setBarStations(new HashSet<>());
+        User user = new User();
+        user.setId(uid);
+        user.setOrganizationId(2L);
+        user.setBarStations(new HashSet<>());
         when(userRepository.findById(uid)).thenReturn(Optional.of(user));
         assertThrows(BadRequestException.class, () -> barStationService.getUserStations(uid, 1L));
     }
@@ -117,11 +128,16 @@ class BarStationServiceTest {
 
     @Test
     void updateStation_Success_AssignsUsers() {
-        Long orgId = 1L; Long stationId = 10L; UUID uid = UUID.randomUUID();
+        Long orgId = 1L;
+        Long stationId = 10L;
+        UUID uid = UUID.randomUUID();
         BarStation station = BarStation.builder().id(stationId).organizationId(orgId).name("Old").users(new HashSet<>()).build();
         when(barStationRepository.findByOrganizationIdAndId(orgId, stationId)).thenReturn(Optional.of(station));
         when(barStationRepository.findByOrganizationId(orgId)).thenReturn(List.of(station));
-        User user = new User(); user.setId(uid); user.setOrganizationId(orgId); user.setBarStations(new HashSet<>());
+        User user = new User();
+        user.setId(uid);
+        user.setOrganizationId(orgId);
+        user.setBarStations(new HashSet<>());
         when(userRepository.findById(uid)).thenReturn(Optional.of(user));
         when(barStationRepository.save(any(BarStation.class))).thenAnswer(a -> a.getArgument(0));
         when(barStationMapper.toResponseDto(any())).thenAnswer(a -> new BarStationResponseDto(stationId, orgId, "Upd", null, false, List.of(), null, null));
@@ -143,7 +159,10 @@ class BarStationServiceTest {
     @Test
     void getUserStations_ReturnsMapped() {
         UUID uid = UUID.randomUUID();
-        User user = new User(); user.setId(uid); user.setOrganizationId(1L); user.setBarStations(new HashSet<>());
+        User user = new User();
+        user.setId(uid);
+        user.setOrganizationId(1L);
+        user.setBarStations(new HashSet<>());
         BarStation st = BarStation.builder().id(1L).organizationId(1L).name("A").build();
         user.getBarStations().add(st);
         when(userRepository.findById(uid)).thenReturn(Optional.of(user));
