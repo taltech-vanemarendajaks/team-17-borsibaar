@@ -17,7 +17,7 @@ services:
   backend:
     build:
       context: backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     container_name: borsibaar-backend
     expose:
       - "8080"
