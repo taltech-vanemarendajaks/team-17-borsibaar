@@ -107,15 +107,15 @@ jobs:
           # docker image prune -af || true
 
           # Stop existing containers
-          docker compose -f "$DOCKER_COMPOSE_FILE" down
+          sudo docker compose -f "$DOCKER_COMPOSE_FILE" down
 
           # Rebuild and start containers
-          docker compose -f "$DOCKER_COMPOSE_FILE" build --no-cache
-          docker compose -f "$DOCKER_COMPOSE_FILE" up -d
+          sudo docker compose -f "$DOCKER_COMPOSE_FILE" build --no-cache
+          sudo docker compose -f "$DOCKER_COMPOSE_FILE" up -d
 
           # Clean up old images
-          # docker image prune -f
+          # sudo docker image prune -f
 
           echo "Deployment complete!"
-          docker compose -f "$DOCKER_COMPOSE_FILE" ps
+          sudo docker compose -f "$DOCKER_COMPOSE_FILE" ps
           EOF
