@@ -82,8 +82,7 @@ class InventoryServiceTest {
         });
         when(inventoryMapper.toResponse(any())).thenAnswer(inv -> {
             Inventory i = inv.getArgument(0);
-            return new InventoryResponseDto(i.getId(), i.getOrganizationId(), i.getProductId(), "P", i.getQuantity(), i.getAdjustedPrice(), product.getDescription(), null, null, null, i.getUpdatedAt().toString());
-        });
+            return new InventoryResponseDto(i.getId(), product.getOrganizationId(), i.getProductId(), "P", i.getQuantity(), i.getAdjustedPrice(), product.getDescription(), null, null, null, i.getUpdatedAt().toString()); });
 
         AddStockRequestDto request = new AddStockRequestDto(5L, BigDecimal.valueOf(10), "Notes");
         InventoryResponseDto dto = inventoryService.addStock(request, userId, 1L);
@@ -106,13 +105,12 @@ class InventoryServiceTest {
     @Test
     void removeStock_Insufficient_ThrowsBadRequest() {
         Product product = new Product();
-        product.setId(5L);
-        product.setOrganizationId(1L);
+        product.setId(5L); product.setOrganizationId(1L);
         product.setActive(true);
         product.setBasePrice(BigDecimal.ONE);
         Inventory inv = new Inventory();
         inv.setId(9L);
-        inv.setOrganizationId(1L);
+        product.setOrganizationId(1L);
         inv.setProduct(product);
         inv.setProductId(5L);
         inv.setQuantity(BigDecimal.valueOf(2));
@@ -134,7 +132,6 @@ class InventoryServiceTest {
         product.setBasePrice(BigDecimal.valueOf(2));
         Inventory inv = new Inventory();
         inv.setId(9L);
-        inv.setOrganizationId(1L);
         inv.setProduct(product);
         inv.setProductId(5L);
         inv.setQuantity(BigDecimal.valueOf(5));
@@ -146,8 +143,7 @@ class InventoryServiceTest {
                 .thenAnswer(invocation -> invocation.getArgument(0));
         when(inventoryMapper.toResponse(any())).thenAnswer(a -> {
             Inventory i = a.getArgument(0);
-            return new InventoryResponseDto(i.getId(), i.getOrganizationId(), i.getProductId(), "Prod", i.getQuantity(), i.getAdjustedPrice(), product.getDescription(), null, null, null, i.getUpdatedAt().toString());
-        });
+            return new InventoryResponseDto(i.getId(), product.getOrganizationId(), i.getProductId(), "Prod", i.getQuantity(), i.getAdjustedPrice(), product.getDescription(), null, null, null, i.getUpdatedAt().toString()); });
 
         AdjustStockRequestDto request = new AdjustStockRequestDto(5L, BigDecimal.valueOf(8), "Adj");
         InventoryResponseDto dto = inventoryService.adjustStock(request, userId, 1L);
@@ -169,13 +165,11 @@ class InventoryServiceTest {
         p2.setName("B");
         Inventory inv1 = new Inventory();
         inv1.setId(1L);
-        inv1.setOrganizationId(1L);
         inv1.setProduct(p1);
         inv1.setQuantity(BigDecimal.ONE);
         inv1.setUpdatedAt(OffsetDateTime.now());
         Inventory inv2 = new Inventory();
         inv2.setId(2L);
-        inv2.setOrganizationId(1L);
         inv2.setProduct(p2);
         inv2.setQuantity(BigDecimal.ONE);
         inv2.setUpdatedAt(OffsetDateTime.now());
@@ -189,7 +183,6 @@ class InventoryServiceTest {
     void getByProductAndOrganization_ProductInactive_Gone() {
         Inventory inv = new Inventory();
         inv.setId(1L);
-        inv.setOrganizationId(1L);
         inv.setProductId(10L);
         inv.setQuantity(BigDecimal.ONE);
         inv.setUpdatedAt(OffsetDateTime.now());
@@ -225,7 +218,6 @@ class InventoryServiceTest {
         product.setBasePrice(new BigDecimal("2.00"));
         Inventory inv = new Inventory();
         inv.setId(10L);
-        inv.setOrganizationId(1L);
         inv.setProduct(product);
         inv.setProductId(5L);
         inv.setQuantity(new BigDecimal("10"));
@@ -236,7 +228,7 @@ class InventoryServiceTest {
         when(inventoryRepository.save(any(Inventory.class))).thenAnswer(a -> a.getArgument(0));
         when(inventoryMapper.toResponse(any())).thenAnswer(a -> {
             Inventory i = a.getArgument(0);
-            return new InventoryResponseDto(i.getId(), i.getOrganizationId(), i.getProductId(), "Prod", i.getQuantity(), i.getAdjustedPrice(), product.getDescription(), null, null, null, i.getUpdatedAt().toString());
+            return new InventoryResponseDto(i.getId(), product.getOrganizationId(), i.getProductId(), "Prod", i.getQuantity(), i.getAdjustedPrice(), product.getDescription(), null, null, null, i.getUpdatedAt().toString());
         });
 
         RemoveStockRequestDto request = new RemoveStockRequestDto(5L, new BigDecimal("3"), "sale-1", "note");
@@ -252,7 +244,6 @@ class InventoryServiceTest {
     void getTransactionHistory_MapsUserInfo() {
         Inventory inv = new Inventory();
         inv.setId(100L);
-        inv.setOrganizationId(1L);
         inv.setProductId(10L);
         when(inventoryRepository.findByOrganizationIdAndProductId(1L, 10L)).thenReturn(Optional.of(inv));
         UUID uid = UUID.randomUUID();
