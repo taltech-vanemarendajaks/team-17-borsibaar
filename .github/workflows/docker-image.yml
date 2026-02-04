@@ -57,12 +57,10 @@ jobs:
       - name: Create deployment package
         run: |
           tar czf deployment.tar.gz \
-            backend/target/*.jar \
+            backend/ \
             frontend/ \
             nginx/ \
             "$DOCKER_COMPOSE_FILE" \
-            backend/Dockerfile \
-            frontend/Dockerfile \
             .env.production
 
       - name: Install sshpass and openssh-client
